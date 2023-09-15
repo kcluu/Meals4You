@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Meal Request</title>
+        <meta charset="utf-8" />
+        <meta name="author" content="Sarah Deacon" />
+        <meta name="keywords" content="form, buy, payment" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <link href="css/bootstrap.css" rel="stylesheet" />
+
+        <style>
+          * {
+            box-sizing: border-box;
+          }
+          .navbar-brand {
+            padding: 0px;
+          }
+          .navbar-brand>img {
+            height: 100%;
+            padding: 5px;
+            width: auto;
+          }
+      
+          hr{
+              width: 100%;
+              height: 1px;
+              background-color: #f43c54;
+              position: fixed;
+              left: 0px;
+              margin-top: 10px;
+          }
+      
+          /*
+          .mealSec{
+            border: 2px;
+            border-style: solid;
+            border-color: grey;
+            margin-right: 500px;
+          }*/
+      
+          #body{
+            padding-left: 15px;
+            background-color: peachpuff;
+            padding-bottom: 15px;
+            padding-top: 2px;
+            /*border: black 2px solid;*/
+            margin-right: 50px;
+            margin-left:50px;
+            margin-bottom: 25px;
+            border: 2px solid grey;
+            border-top:none;
+          }
+          #title{
+            text-align: center;
+          }
+          body{
+            background-image: url('food.jpeg');
+          }
+          #background{
+            background-color: white;
+            padding-top: 25px;
+          }
+          #mealImg{
+            position: fixed;
+            right:12%;
+            top:23%;
+            width: 450px;
+          }
+          #CreditPayment{
+            display: none;
+          }
+          #title2{
+            border: 2px solid grey;
+            background-color: white;
+            padding-bottom: 10px;
+            margin-right: 50px;
+            margin-left:50px;
+            
+          }
+      
+          </style>
+
+        <script src="jquery-3.1.1.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        
+    
+    
+
+    <script type="text/javascript">
+      //var frmObject = document.forms[0];
+
+      function checkPayment() {
+        console.log("In check payment");
+        var frmObject = document.getElementById("form1");
+
+        var z=document.getElementById("CreditPayment");
+        if(frmObject.payMethod.value=="credit") {
+          console.log("Selected credit");
+          z.style.display = "block";
+        } 
+        else {
+          z.style.display = "none";
+       }    
+      }
+
+    
+      function init() {
+            //specify the function checkInputs as the event listner for the submit event of the form element
+            var x = document.getElementById("form1");
+            //x.addEventListener("submit", checkInputs);
+            x.addEventListener("change", checkPayment);
+        }
+
+
+      document.addEventListener("DOMContentLoaded", init);
+    </script>
+
+    </head>
+
+    <body>
+      <img src="meal.jpeg" id="mealImg">
+
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+              <img alt="Logo" src="logo3.png" width=90px>
+            </a>
+          </div>
+      
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+              <li><a href="#">Profiles</a></li>
+              <li><a href="#">Requests</a></li>
+            </ul>
+            <form class="navbar-form navbar-left">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+              </div>
+              <button type="submit" class="btn btn-default">Search</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#">My Profile</a></li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+         </div><!-- /.container-fluid -->
+        </nav>
+
+        
+        
+        
+        <div id="backgroun">
+          <div id="title2"><h1 id="title">Meal Request</h1></div>
+          <div id="body">
+        <form name="myForm" method="post" id="form1" action="">
+          <section class="mealSec">
+          <h3>Meal Information:</h3>
+            <p>
+            <label>What meal would you like to buy?
+                <input type="text" name="mealrequest" size="25" id="meal" autofocus required> <!--change to dropdown-->
+            </label>
+            </p>
+            <p>
+            <label>Would you like to change anything from the meal? <br>
+                <textarea name="modifications" rows="4" cols="50" id="mods">
+                </textarea>
+            </label>
+            </p>
+            
+          </section>
+
+          <section class="mealSec">
+            <h3>Payment Information:</h3>
+
+            <div id="payMethod"><strong>Payment Method:</strong>
+              <select name="payMethod" id="creditOption" onchange="checkPayment()">
+                  <option value="">Select</option>
+                  <option value="credit">Credit Card</option>
+                  <option value="cash">Cash</option>
+              </select>
+            </div>
+            <br>
+            <div id="CreditPayment">
+              <p>
+                <label>Name on Card:
+                  <input type="text" name="name" placeholder="Jane Doe">
+                </label>
+              </p>
+
+              <p>
+              <label>Credit Card Number:
+                <input type="password" name="creditnumber" size="20">
+              </label>
+              </p>
+
+              <p>
+                <label>Expiration Date:
+                  <input type="month">
+                </label>
+              </p>
+            </div>
+
+          </section>
+
+          <input type="submit" value="Submit">
+          <input type="reset" value="Reset">
+          
+        
+        
+        </section>
+        </form>
+      </div>
+      </div>
+
+    </body>
+</html>
